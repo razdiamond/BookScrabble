@@ -15,19 +15,19 @@ public class MainTrain {
 		int[] q1 = b.getQuantities();
 		if(q0[0]!=q1[0] + 1)
 			System.out.println("getQuantities did not return a clone (-5)");
-		
+
 		for(int k=0;k<9;k++) {
-			int[] qs = b.getQuantities(); 
+			int[] qs = b.getQuantities();
 			Tile t = b.getRand();
 			int i=t.letter-'A';
-			int[] qs1 = b.getQuantities();		
+			int[] qs1 = b.getQuantities();
 			if(qs1[i]!=qs[i]-1)
 				System.out.println("problem with getRand (-1)");
-			
+
 			b.put(t);
 			b.put(t);
 			b.put(t);
-			
+
 			if(b.getQuantities()[i]!=qs[i])
 				System.out.println("problem with put (-1)");
 		}
@@ -57,27 +57,30 @@ public class MainTrain {
 		
 		
 		Bag bag = Bag.getBag();
-		/*
+
 		Tile[] ts=new Tile[10];
 		for(int i=0;i<ts.length;i++) 
 			ts[i]=bag.getRand();
 		
 		Word w0=new Word(ts,0,6,true);
+		Word w0_2=new Word(ts,6,0,false);
 		Word w1=new Word(ts,7,6,false);
 		Word w2=new Word(ts,6,7,true);
 		Word w3=new Word(ts,-1,7,true);
+
+		Word w3_2 = new Word(ts, 7, -1, false);
 		Word w4=new Word(ts,7,-1,false);
 		Word w5=new Word(ts,0,7,true);
 		Word w6=new Word(ts,7,0,false);
 
-		if (b.boardLegal(w0) || b.boardLegal(w1)
-				|| b.boardLegal(w2) || b.boardLegal(w3)
+		if (b.boardLegal(w0) || b.boardLegal(w0_2) || b.boardLegal(w1)
+				|| b.boardLegal(w2) || b.boardLegal(w3) || b.boardLegal(w3_2)
 				|| b.boardLegal(w4) || !b.boardLegal(w5)
 				|| !b.boardLegal(w6))
 			System.out.println("your boardLegal function is wrong (-10)");
 
 		for(Tile t : ts)
-			bag.put(t);*/
+			bag.put(t);
 		
 		Word horn=new Word(get("HORN"), 7, 5, false);
 		if(b.tryPlaceWord(horn)!=14)
@@ -98,12 +101,30 @@ public class MainTrain {
 		Word bit=new Word(get("BIT"), 10, 4, false);
 		if(b.tryPlaceWord(bit)!=22)
 			System.out.println("problem in placeWord for 5th word (-15)");
-		
 
+		Word ir=new Word(get("IR"), 10, 5, false);
+		if(b.tryPlaceWord(ir)!=0)
+			System.out.println("problem in placeWord for 6th word (-15)");
+
+		Word li=new Word(get("LI"), 9, 5, true);
+		if(b.tryPlaceWord(li)!=0)
+			System.out.println("problem in placeWord for 7th word (-15)");
+
+		Word lake = new Word(get("L_KE"), 6, 6, false);
+		if (b.tryPlaceWord(lake)!=14+3+14)
+			System.out.println("problem in placeWord for 7th word (-15)");
+
+		Word word8 = new Word(get("AAAAAC__E__FEEE"), 0, 6, true);
+		if (b.tryPlaceWord(word8)!=41)
+			System.out.println("problem in placeWord for 8th word (-15)");
+
+		Word tec = new Word(get("__C"), 9, 8, false);
+		if (b.tryPlaceWord(tec)!=25)
+			System.out.println("problem in placeWord for 9th word (-15)");
 	}
 
 	public static void main(String[] args) {
-		//testBag(); // 30 points
+		testBag(); // 30 points
 		testBoard(); // 70 points
 		System.out.println("done");				
 	}
