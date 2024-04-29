@@ -18,8 +18,8 @@ public class IOSearcher {
     }
 
     public static boolean search (String word, String... fileNames) throws Exception {
-        for (int i = 0; i < fileNames.length; i++)
-            if (bookContains(fileNames[i], word))
+        for (String fileName : fileNames)
+            if (bookContains(fileName, word))
                 return true;
         return false;
     }
